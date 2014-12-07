@@ -1,0 +1,4 @@
+WolframLotto
+============
+
+Project for Hackathon

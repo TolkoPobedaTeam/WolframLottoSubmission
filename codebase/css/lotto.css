@@ -1,0 +1,139 @@
+html, body {font-family:Verdana;}
+
+#card {display:none;}
+
+.card {
+		width: 300px;
+		height: 150px;
+		border:1px solid black;
+		background:white;
+		z-index:2;
+		cursor:default;
+		font-size:10px;
+		
+		-webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+	}
+	
+	.card.ui-draggable-dragging {
+		-webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+	}
+	
+	.card img {float:left; padding:6px 5px 5px 5px;}
+	.card ul {list-style:none; margin-left:70px;}
+	.card li {color:gray}
+	.card li span {color:black}
+	.card .title {float:left; height:15px; padding-top:5px; width:100%; text-align:center; font-weight:bold; font-size:12px}
+	
+	.loto {
+		border:1px solid #8EA2B5;
+		padding:10px;
+		padding-right:0;
+		padding-bottom:0;
+		position:absolute;
+		bottom:10px;
+		background:#DBEAF9;
+		width:938px;
+		
+		-webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		-moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		
+		-webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+	}
+	.block {
+		border:1px solid #8EA2B5;
+		
+		width:300px;
+		height:150px;
+		float:left;
+		margin-right:10px;
+		margin-bottom:10px;
+		position:relative;
+	}
+	.block center {position:absolute; top:50%; margin-top:-10px; width:100%;}
+	.block.active {background:#F1F6FA; color:#fff}
+	
+	.users {
+	    float:right;
+	    width:200px;
+	    border:1px solid #8EA2B5;
+	    font-size:12px;
+	    background:#DBEAF9;
+	}
+	
+	.users ul {
+	    list-style:none;
+	    padding:5px;
+	    padding-top:0;
+	}
+	
+	.users li {
+	    padding:4px;
+	    margin:2px;
+	    
+	    -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+	}
+	.users li.iam {
+	    padding:3px;
+	    border:1px solid #8EA2B5;
+	}
+	.users li .success {
+	    color:#01AE5A;
+	    float:right;
+	    padding:0 5px;
+	    font-style:normal;
+	    border-left:1px solid #A5B2BE;
+	}
+	.users li .errors {
+	    color:#D7242D;
+	    float:right;
+	    padding:0 5px;
+	    font-style:normal;
+	    border-left:1px solid #A5B2BE;
+	}
+	
+	.help {
+	   padding:5px;
+	   margin:0;
+	   color:gray;
+	   font-size:10px;
+	   font-weight:normal;
+	   padding-bottom:0;
+	}
+	
+	#startGameCounter {
+	    position:absolute;
+	    width:200px;
+	    left:50%;
+	    margin-left:-100px;
+	    display:none;
+	    font-size:16px;
+	}
+	
+	#roundCounter {
+	    position:absolute;
+	    width:200px;
+	    left:50%;
+	    top:100px;
+	    margin-left:-100px;
+	    display:none;
+	    font-size:16px;
+	}
+	
+	#onePlayer {
+	    position:absolute;
+	    width:200px;
+	    left:50%;
+	    top:150px;
+	    margin-left:-100px;
+	    display:none;
+	    font-size:16px;
+	}
