@@ -82,7 +82,7 @@ body {
     color:#fff;
     opacity:0.5;
 }
-.block.statusOK {
+.block.statusOk {
     background:#000 url(../img/card-win.png) center center no-repeat;
 }
 
