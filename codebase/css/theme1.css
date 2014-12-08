@@ -3,7 +3,7 @@ body {
     background:#000 url(../img/fon2.png) center center no-repeat;
 }
 
-#card {display:block;}
+/* #card {display:block;} */
 .card {
     background:#000 url(../img/card.png) center center no-repeat;
     
@@ -12,30 +12,100 @@ body {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+    
+    left:50%;
+    margin-left:-150px;
 }
 .card .wrapper {
+    /*
     background:url(../img/card-wrap-bg.png);
     border:2px solid #49290f;
     margin:8px;
     height:130px;
+    */
 }
 .card img {
     padding:0;
     margin:5px;
     border:1px solid #49290f;
+    position:relative;
+    margin-top:-20px;
 }
 .card .title {
     font-family:Myriad Pro;
-    color:#9d5f28;
+    color:#fff;
     text-transform:uppercase;
+    font-weight:normal;
+    font-size:14px;
+    padding-top:3px;
+    height:20px;
 }
 .card li {
-    color:#9d5f28;
+    color:#bfb4bd;
     font-family:Myriad Pro;
     font-size:11px;
 }
 .card li span {
     font-family:Georgia;
     font-size:11px;
-    color:#744926;
+    color:#fff;
 }
+
+#roundCounter {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:180px;
+    height:159px;
+    margin:0;
+    background:url(../img/round.png);
+    color:#fff;
+    font-family:Myriad Pro;
+    text-align:left;
+    padding-left:20px;
+    padding-top:20px;
+}
+#roundCounter b {font-size:35px; font-weight:normal;}
+
+.block {
+   background:#000 url(../img/card.png) center center no-repeat;
+    
+    border:2px solid #fff;
+    color:#fff;
+
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+.block.active {
+    background:#000 url(../img/card.png) center center no-repeat;
+    color:#fff;
+    opacity:0.5;
+}
+.block.statusOK {
+    background:#000 url(../img/card-win.png) center center no-repeat;
+}
+
+.loto {
+    border:none;
+    background:none;
+    width:950px;
+}
+
+.users {
+    background:none;
+    border:none;
+    margin-top:20px;
+}
+.users h4 {
+    background:#ED6F70;
+    font-size:12px;
+    padding:10px 10px 10px 20px;
+    color:#fff;
+}
+.users LI {
+    background:#fff;
+    padding:10px;
+    color:#CED0CD;
+}
+.users LI.iam {color:#000; padding:10px; border:none;}

@@ -27,6 +27,8 @@ Game.OpenWebSocket = function (wsUri)
 		if (type == "game.start") Game.Start(data);
 		if (type == "game.round.start") Game.StartRound(data);
 		if (type == "game.round.end") Game.EndRound(data);
+		if (type == "game.end") Game.Start(data);
+		if (type == "error") Game.Error(msg.message);
 	};
 	
 	websocket.onerror	= function(ev){console.log(ev.data)}; 
@@ -83,9 +85,9 @@ Game.RefreshUsers = function (data) {
     $(".users ul").html(usersHTML);
     
     if (data.users.length>1) {
-        $('#onePlayer').hide();
+        Interface.InfoHide("Wait perhaps 1 opponent.");
     } else {
-        $('#onePlayer').show();
+        Interface.Info("Wait perhaps 1 opponent.");
     }
 }
 
@@ -106,27 +108,34 @@ Game.RefreshLoto = function (data) {
 
 Game.StartRound = function (data) {
     $(document.body).append($("#card").clone().attr("id","draggable"));
-    $("#draggable .cont").html(data.carddata);
+    
+    // set data in cloned card
+    var cardHTML = "";
+    for (var p in data.carddata.data) {
+        var param = data.carddata.data[p];
+        cardHTML += "<li>"+param.name+": <span>"+param.value+"</span></li>";
+    }
+    $("#draggable ul").html(cardHTML);
+    $("#draggable img").attr("src", data.carddata.img);
+    
     Interface.DraggableCard();
     
     $("#roundCounter").fadeIn();
     $("#roundCounter b").html(data.roundid);
+    
+    Interface.InfoHide("Wait next round. (Sometimes Wolfram API long answer)");
 }
 
 Game.EndRound = function (data) {
-    for (var u=0; u<data.users.length; u++) {
-        if (data.users[u].sessmd5 == $.md5(Game.sessid)) {
-            if (data.users[u].choices) {
-                if (data.users[u].choices.result == 1) {
-                    $("#draggable")
-                        .attr("id", "card"+data.users[u].choices.placeid)
-                        .draggable({disabled: true});
-                }
-            }
-        }
-    }
+    $("#draggable").draggable({disabled:true});
+    $("#draggable").attr("id", "").fadeOut(500, function () {
+        $(this).remove();
+        Interface.ResetActive();
+    });
     
-    $("#draggable").attr("id", "").fadeOut(500, function () {$(this).remove()});
+    $("#roundCounter").fadeOut();
+    
+    Interface.Info("Wait next round. (Sometimes Wolfram API long answer)");
     
     Game.Refresh(data);
     Game.RefreshLoto(data);
@@ -158,6 +167,34 @@ Game.Choice = function (placeid)
 	//convert and send data to server
 	Game.websocket.send(JSON.stringify(msg));
 	console.log("SEND: "+JSON.stringify(msg));
+}
+
+Game.End = function (data)
+{
+    var endHTML = "Game End.<br>"
+    if (data.winners.length) {
+        var winners = [];
+        var users = [];
+        var iWinner = false;
+        for (var i=0; i<data.users.lenght; i++) {
+            users[data.users[i].id] = data.users[i];
+        }
+        for (var i=0; i<data.winners.lenght; i++) {
+            var userid = data.winners[i];
+            if (users[userid]) winners.push(users[userid].name);
+            if (users[userid].sessmd5 == $.md5(Game.sessid)) iWinner = true;
+        }
+        endHTML += "Winners: " + winners.join(", ") + ".<br>";
+        if (iWinner) endHTML += "Congrats, Your knowledge is impressive!";
+    } else {
+        endHTML += "No winners. :("
+    }
+    Interface.ModalInfo();
+}
+
+Game.Error = function (err)
+{
+    Interface.ModalInfo("<span class='error'>Sorry, " + err + "</span>");
 }
 
 $(function() {

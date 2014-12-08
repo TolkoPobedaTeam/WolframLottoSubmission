@@ -54,6 +54,7 @@ $times=array(
 	"afterroundstart"=>10,
 	);
 $maxrounds=15;
+$maxrounds=3;
 $Game=new Game();
 $Game->End();	
 
@@ -134,16 +135,17 @@ while (true)
 					}
 				if($cmd=='game.connect')
 					{
+					$serverid=(int)$msg["serverid"];
+					$name=AddSlashes($msg["name"]);
+					$sessid=preg_replace("|[^a-z0-9]|","",$msg["sessid"]);						
 					//check if game already in progress
 					if($Game->lastaction!='game.end')
 						{
-						send_one_message(array('type'=>'error', 'message'=>"Game already started"));
+						//send_one_message(array('type'=>'error', 'message'=>"Game already started"));
+						$Game->AttachUserInStartedGame($serverid,$name,$sessid);
 						}
 						else //all good
 						{
-						$serverid=(int)$msg["serverid"];
-						$name=AddSlashes($msg["name"]);
-						$sessid=preg_replace("|[^a-z0-9]|","",$msg["sessid"]);						
 						$Game->AttachUser($serverid,$name,$sessid);
 						}
 					}

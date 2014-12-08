@@ -31,7 +31,7 @@ return $items[$line];
 
 
 
-public function getcached($word)
+public function getcached($word) //!!!added cache of requests because api of wolfram work very slowly
 {
 $path=__DIR__."/../cache/wl_$word.cache";
 if(!file_exists($path)) 

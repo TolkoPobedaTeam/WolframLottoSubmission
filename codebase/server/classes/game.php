@@ -138,6 +138,36 @@ $this->Users->Save();
 send_message(array('type'=>'game.start', 'data'=>array("users"=>$this->Users->getData()))); //send data
 }
 
+public function AttachUserInStartedGame($serverid,$name,$sessid)
+{
+$this->Users->Add($name,$sessid);
+$ukey=$this->Users->getUserKeyBySessid($sessid);
+$userid=$this->Users->data["users"][$ukey]["userid"];
+//generate card
+
+$users=$this->Users->data["users"];
+$placemap=$this->Users->data["placemap"];
+$items=array_rand($this->carditems,6);
+$positions=array();
+foreach($items as $k=>$vind)
+	{
+	$v=$this->carditems[$vind];
+	$positions[$k]=array(
+		"name"=>$v,
+		"status"=>0,
+		"id"=>$k,
+		);
+	$placemap[$v][]=array("userid"=>$userid,"pos"=>$k);
+	}
+$users[$ukey]["positions"]=$positions;
+$this->Users->data=array("users"=>$users,"placemap"=>$placemap);
+$this->Users->Save();
+
+//send refresh info
+send_message(array('type'=>'game.refresh', 'data'=>array("users"=>$this->Users->getData()))); //send data
+}
+
+
 public function AttachUser($serverid,$name,$sessid)
 {
 $this->Users->Add($name,$sessid);
@@ -171,7 +201,8 @@ $GLOBALS["lasttime"]=time();
 $winners=array();
 foreach($this->Users->data["users"] as $user)
 	{
-	if($user["success"]>=count($user["positions"]))
+	#if($user["success"]>=count($user["positions"]))
+	if(true)
 		{
 		$winners[]=$user["userid"];
 		}

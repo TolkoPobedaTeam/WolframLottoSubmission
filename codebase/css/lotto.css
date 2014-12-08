@@ -131,7 +131,7 @@ html, body {font-family:Verdana;}
 	    font-size:16px;
 	}
 	
-	#onePlayer {
+	#info {
 	    position:absolute;
 	    width:200px;
 	    left:50%;
@@ -140,3 +140,5 @@ html, body {font-family:Verdana;}
 	    display:none;
 	    font-size:16px;
 	}
+	
+	.error {color:#ED6F70;}
