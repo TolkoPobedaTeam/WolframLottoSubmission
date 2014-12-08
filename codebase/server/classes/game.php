@@ -201,8 +201,8 @@ $GLOBALS["lasttime"]=time();
 $winners=array();
 foreach($this->Users->data["users"] as $user)
 	{
-	#if($user["success"]>=count($user["positions"]))
-	if(true)
+	if($user["success"]>=count($user["positions"]))
+	#if(true)
 		{
 		$winners[]=$user["userid"];
 		}

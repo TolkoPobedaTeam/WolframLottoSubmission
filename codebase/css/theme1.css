@@ -27,7 +27,7 @@ body {
 .card img {
     padding:0;
     margin:5px;
-    border:1px solid #49290f;
+    border:1px solid #fff;
     position:relative;
     margin-top:-20px;
 }
@@ -96,6 +96,12 @@ body {
     background:none;
     border:none;
     margin-top:20px;
+    
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         1px 1px 5px 0px rgba(50, 50, 50, 0.75);
+		
+	padding:5px;
 }
 .users h4 {
     background:#ED6F70;
