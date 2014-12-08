@@ -10,10 +10,10 @@ if(count($items)>1)
     {
     $data["name"]=trim($items[0]);
     if(preg_match_all("|\(([^()]+)\)|",$items[1],$matches))
-	{
-	$data["value"]=trim(preg_replace("|\([^()]+\)|","",$items[1]));
-	$data["comments"]=$matches[1];
-	}
+		{
+		$data["value"]=trim(preg_replace("|\([^()]+\)|","",$items[1]));
+		$data["comments"]=$matches[1];
+		}
     }
     elseif(!empty($title))
     {
@@ -30,8 +30,21 @@ return $items[$line];
 }
 
 
-public function get($word)
+
+public function getcached($word)
 {
+$path=__DIR__."/../cache/wl_$word.cache";
+if(!file_exists($path)) 
+	{
+	file_put_contents($path,json_encode($this->get($word,false)));
+	}
+return json_decode(file_get_contents($path),true);
+}
+
+
+public function get($word,$cached=true)
+{
+if($cached) return $this->getcached($word);
 error_log("Api->get($word)");
 foreach(array(1,2,3) as $iteration)
 	{

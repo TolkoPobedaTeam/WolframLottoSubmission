@@ -100,7 +100,7 @@ foreach($this->roundchoices as $userid=>$placeid)
 		$choices[$userid]=array("placeid"=>$placeid,"result"=>1);
 		}
 	}
-send_message(array('type'=>'game.round.end', 'data'=>array("users"=>$this->Users->getData($choices)))); //send data
+send_message(array('type'=>'game.round.end', 'data'=>array("users"=>$this->Users->getData($choices),"cardname"=>$this->roundcardname))); //send data
 }
 
 
@@ -160,7 +160,24 @@ if($this->Users->count>1 and $dtime>$GLOBALS["times"]["waitplayers"])
 public function GameOver()
 {
 $GLOBALS["lasttime"]=time();
-send_message(array('type'=>'game.end', 'data'=>array("users"=>$this->Users->getData()))); //send data
+/*		$this->Users->data["users"][$uind]["success"]++;
+		if($this->Users->data["users"][$uind]["success"]>=count($this->Users->data["users"][$uind]["positions"]))
+			{
+			return $this->GameOver();
+			}
+		$this->Users->data["users"][$uind]["positions"][$placeid]["status"]=1;
+		$choices[$userid]=array("placeid"=>$placeid,"result"=>1);
+*/
+$winners=array();
+foreach($this->Users->data["users"] as $user)
+	{
+	if($user["success"]>=count($user["positions"]))
+		{
+		$winners[]=$user["userid"];
+		}
+	}
+		
+send_message(array('type'=>'game.end', 'data'=>array("users"=>$this->Users->getData(),"winners"=>$winners))); //send data
 $this->End();
 }
 
